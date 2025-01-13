@@ -3,36 +3,35 @@ import predicTech from "@/assets/logo_predic.svg";
 
 export default function Navbar() {
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 bg-white shadow-sm dark:bg-gray-950/90">
+    <nav className="fixed inset-x-0 top-0 z-50 p-2 text-white shadow-sm bg-zinc-950/60">
       <div className="w-full max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-14 items-center">
           <Link to="/" className="flex items-center justify-evenly">
             <img src={predicTech} className="w-8"></img>
-            {/* <MountainIcon className="h-6 w-6" /> */}
-            <span className="w-1/2 text-xl">PredicTech</span>
+            <span className="w-1/2 text-xl font-medium">PredicTech</span>
           </Link>
           <nav className="hidden md:flex gap-4">
             <Link
-              to="#"
+              to="/"
               className="font-medium flex items-center text-sm transition-colors hover:underline"
               //   prefetch={false}
             >
-              Home
+              Dashboard
             </Link>
             <Link
-              to="#"
+              to="/add-sensor"
               className="font-medium flex items-center text-sm transition-colors hover:underline"
               //   prefetch={false}
             >
-              About
+              Add sensor
             </Link>
-            <Link
+            {/* <Link
               to="#"
               className="font-medium flex items-center text-sm transition-colors hover:underline"
               //   prefetch={false}
             >
               Services
-            </Link>
+            </Link> */}
             <Link
               to="#"
               className="font-medium flex items-center text-sm transition-colors hover:underline"

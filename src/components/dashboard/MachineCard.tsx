@@ -1,23 +1,25 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Machine } from "./types";
 import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import AddMachineCard from "./AddMachineCard";
 
 interface MachineProps {
   machinesData: Machine[];
 }
 export default function MachineCard({ machinesData }: MachineProps) {
   return (
-    <div className="grid grid-cols-6 gap-8">
+    <div className="grid grid-cols-5 gap-8">
+      <AddMachineCard />
       {machinesData.map((machine) => (
-        <Card>
-          <CardHeader className="flex flex-row w-full items-center justify-between">
+        <Card
+          className={cn(
+            "bg-zinc-900 text-white border-zinc-600 h-56",
+            machine.state ? "opacity-100" : "bg-opacity-40 text-opacity-40"
+          )}
+        >
+          <CardHeader className="flex flex-row w-full items-center justify-between text-xl h-12">
             <CardTitle>{machine.name}</CardTitle>
             <svg width="20" height="20" viewBox="0 0 20 20">
               <circle
@@ -29,12 +31,34 @@ export default function MachineCard({ machinesData }: MachineProps) {
               />
             </svg>
           </CardHeader>
-          <CardContent className="w-full flex gap-1">
-            <p>time on:</p>
-            {machine.timeOn.toLocaleTimeString()}
-            <Link to={`/machines/${machine.machineId}`}>
-              <p>Details</p>
-            </Link>
+          <CardContent className="w-full flex gap-1 flex-col justify-end h-44">
+            {machine.state == true ? (
+              <div className="flex gap-4">
+                <p>time on:</p>
+                {machine.timeOn.toLocaleTimeString()}
+              </div>
+            ) : (
+              ""
+            )}
+            <div className="grid grid-cols-4 gap-2 ">
+              <Button
+                disabled={machine.state}
+                className="rounded hover:border-zinc-500 hover:bg-zinc-800"
+              >
+                Connect
+              </Button>
+              <Button className="rounded hover:border-zinc-500 hover:bg-zinc-800">
+                Edit
+              </Button>
+              <Button className="rounded hover:border-zinc-500 hover:bg-zinc-800">
+                Delete
+              </Button>
+              <Button className="rounded hover:border-zinc-500 hover:bg-zinc-800">
+                <Link to={`/machines/${machine.machineId}`}>
+                  <p>Details</p>
+                </Link>
+              </Button>
+            </div>
           </CardContent>
         </Card>
       ))}

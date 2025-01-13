@@ -1,4 +1,5 @@
 import MachineCard from "@/components/dashboard/MachineCard";
+import StatsCard from "@/components/dashboard/StatsCard";
 import type { Machine } from "@/components/dashboard/types";
 import { parseTime } from "@/utils/fun";
 
@@ -79,7 +80,8 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="pt-[5.5rem] px-8 gap-8">
+    <div className="gap-8 flex flex-col">
+      <StatsCard />
       <MachineCard machinesData={machines} />
     </div>
   );

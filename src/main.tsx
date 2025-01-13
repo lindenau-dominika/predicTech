@@ -6,6 +6,7 @@ import Dashboard from "./pages/(logged-in)/DashboardPage";
 import MachinesPage from "./pages/(logged-in)/MachinesPage";
 import NotFound from "./pages/NotFoundPage";
 import Layout from "./pages/Layout";
+import AddSensorPage from "./pages/(logged-in)/AddSensorPage";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Dashboard /> },
       { path: "/machines", element: <MachinesPage /> },
+      { path: "/add-sensor", element: <AddSensorPage /> },
     ],
   },
   {
