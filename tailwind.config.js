@@ -10,14 +10,7 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
 		  colors: {
-			  dark: {
-				  950: "#09090b",
-				  900: "#18181b",
-				  800: "#1f2937",
-				  700: "#374151",
-				  600: "#475569",
-				  500: ""
-			  }
+			  predic: '#1A32F6'
 			//   lightMode: 
 		}
   	}
