@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import predicTech from "@/assets/logo_predic.svg";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   return (
@@ -40,6 +41,9 @@ export default function Navbar() {
               Contact
             </Link>
           </nav>
+          <div className="p-6">
+          <ThemeToggle />
+          </div>
           {/* <div className="flex items-center gap-4">
             <Button variant="outline" size="sm">
               Sign in

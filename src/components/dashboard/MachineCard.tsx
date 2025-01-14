@@ -10,13 +10,15 @@ interface MachineProps {
 }
 export default function MachineCard({ machinesData }: MachineProps) {
   return (
-    <div className="grid grid-cols-5 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-8 pb-8">
       <AddMachineCard />
       {machinesData.map((machine) => (
         <Card
           className={cn(
-            "bg-zinc-900 text-white border-zinc-600 h-56",
-            machine.state ? "opacity-100" : "bg-opacity-40 text-opacity-40"
+            "dark:bg-zinc-900 h-56 border-zinc-400",
+            machine.state
+              ? "opacity-100"
+              : "dark:bg-opacity-30 dark:text-opacity-40 text-opacity-40 border-opacity-40"
           )}
         >
           <CardHeader className="flex flex-row w-full items-center justify-between text-xl h-12">
@@ -44,10 +46,11 @@ export default function MachineCard({ machinesData }: MachineProps) {
               <Button
                 disabled={machine.state}
                 className="rounded hover:border-zinc-500 hover:bg-zinc-800"
+                variant={machine.state ? "ghost" : "default"}
               >
                 Connect
               </Button>
-              <Button className="rounded hover:border-zinc-500 hover:bg-zinc-800">
+              <Button className="rounded hover:border-zinc-500 hover:bg-zinc-800 ">
                 Edit
               </Button>
               <Button className="rounded hover:border-zinc-500 hover:bg-zinc-800">

@@ -9,9 +9,9 @@ export default function StatsCard() {
     { title: "Energy", value: "xxxxx" },
   ];
   return (
-    <div className="grid grid-cols-4 gap-8 mb-8 my-4">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-8 my-4">
       {stats.map((stat) => (
-        <Card className="bg-zinc-900 text-white border-zinc-600 h-40">
+        <Card className="dark:bg-zinc-900 light:bg-zinc-300  border-zinc-400 h-40">
           <CardHeader className="flex flex-row justify-between">
             <CardTitle className="text-xl">{stat.title}</CardTitle>
             <Zap className="size-6" />
