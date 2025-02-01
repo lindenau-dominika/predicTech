@@ -3,4 +3,5 @@ export interface Machine {
   name: string;
   state: boolean;
   timeOn: Date;
+  dataset: number[];
 }
