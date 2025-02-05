@@ -1,63 +1,88 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
-
+import ErrorCard from "../machine/ErrorCard";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
 
-// Menu items.
 const items = [
   {
-    title: "Home",
-    url: "#",
-    icon: Home,
+    id: 3,
+    isWarning: true,
+    message:
+      "some kind of a warning, some kind of a warning, some kind of a warning.",
+    url: `/machines/3`,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    id: 5,
+    isWarning: false,
+    message:
+      "some kind of an error, some kind of an error, some kind of an error.",
+    url: "/machines/5",
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
+    id: 9,
+    isWarning: true,
+    message:
+      "some kind of a warning, some kind of a warning, some kind of a warning.",
+    url: "/machines/9",
   },
   {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    id: 5,
+    isWarning: false,
+    message:
+      "some kind of an error, some kind of an error, some kind of an error.",
+    url: "/machines/5",
   },
   {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
+    id: 9,
+    isWarning: true,
+    message:
+      "some kind of a warning, some kind of a warning, some kind of a warning.",
+    url: "/machines/9",
   },
+  {
+    id: 5,
+    isWarning: false,
+    message:
+      "some kind of an error, some kind of an error, some kind of an error.",
+    url: "/machines/5",
+  },
+  {
+    id: 9,
+    isWarning: true,
+    message:
+      "some kind of a warning, some kind of a warning, some kind of a warning.",
+    url: "/machines/9",
+  },
+
+
 ];
 
 export function AppSidebar() {
   return (
-    <Sidebar className="z-30 mr-0">
+    <Sidebar className="z-30 mr-0 top-16 dark:border-predic/40">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="pt-2">
+              <ScrollArea className="pb-16">
+
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
+                <SidebarMenuItem key={item.id}>
+                  <SidebarMenuButton className="flex h-full">
+                    <a href={item.url} className="flex h-full">
+                      <ErrorCard machineId={item.id} isWarning={item.isWarning} message={item.message}/>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              </ScrollArea>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

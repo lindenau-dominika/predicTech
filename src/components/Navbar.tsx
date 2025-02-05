@@ -1,19 +1,17 @@
 import { Link } from "react-router-dom";
 import predicTech from "@/assets/logo_predic.svg";
 import ThemeToggle from "./ThemeToggle";
-import { SidebarTrigger } from "./ui/sidebar";
 
 export default function Navbar() {
   return (
     <nav className="fixed inset-x-0 top-0 p-2 text-white shadow-sm bg-predic z-40">
       <div className="w-full max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-14 items-center">
-          {/* <SidebarTrigger className="left-0" /> */}
           <Link to="/" className="flex items-center justify-evenly">
             <img src={predicTech} className="w-8"></img>
             <span className="w-1/2 text-xl font-medium">PredicTech</span>
           </Link>
-          <nav className="hidden md:flex gap-4">
+          <nav className="hidden md:flex gap-6">
             <Link
               to="/"
               className="font-medium flex items-center text-sm transition-colors hover:underline"
@@ -27,6 +25,13 @@ export default function Navbar() {
               //   prefetch={false}
             >
               Add sensor
+            </Link>
+            <Link
+              to="/report"
+              className="font-medium flex items-center text-sm transition-colors hover:underline"
+              //   prefetch={false}
+            >
+              Report
             </Link>
 
             <Link

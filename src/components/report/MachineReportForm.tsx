@@ -18,8 +18,8 @@ import { Input } from "@/components/ui/input";
 import { Toaster } from "../ui/toaster";
 
 const FormSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  machineId: z.number().min(1, {
+    message: "pass any number.",
   }),
   email: z.string().email({
     message: "Invalid email address.",
@@ -29,11 +29,11 @@ const FormSchema = z.object({
   }),
 });
 
-export default function MachineInputForm() {
+export default function MachineReportForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: "",
+      machineId: 0,
       email: "",
       password: "",
     },
@@ -43,12 +43,7 @@ export default function MachineInputForm() {
     toast({
       title: "Form submitted",
       description:
-        // <pre className="mt-2 w-[340px] rounded-md bg-zinc-950 p-4 z-50 absolute">
-        //   <code className="text-white">
-        //     {JSON.stringify(data.username, null, 2)}
-        //   </code>
-        // </pre>
-        "Your new connection has been added successfully.",
+        "Your report has been sent successfully.",
     });
     console.log(data);
   }
@@ -60,12 +55,12 @@ export default function MachineInputForm() {
       >
         <FormField
           control={form.control}
-          name="username"
+          name="machineId"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Machine ID</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="00" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
+import "./App.css";
 import Dashboard from "./pages/(logged-in)/DashboardPage";
 import MachinesPage from "./pages/(logged-in)/MachinesPage";
 import NotFound from "./pages/NotFoundPage";
@@ -9,6 +10,7 @@ import Layout from "./pages/Layout";
 import AddSensorPage from "./pages/(logged-in)/AddSensorPage";
 import { parseTime } from "./utils/fun";
 import MachinePage from "./pages/(logged-in)/MachinePage";
+import AddReportPage from "./pages/(logged-in)/AddReportPage";
 
 const machines = [
   {
@@ -92,6 +94,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Dashboard /> },
       { path: "/machines", element: <MachinesPage /> },
       { path: "/add-sensor", element: <AddSensorPage /> },
+      { path: "/report", element: <AddReportPage /> },
       {
         path: "/machines/:id",
         element: <MachinePage machinesData={machines} />,
