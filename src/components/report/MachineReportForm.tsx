@@ -21,10 +21,10 @@ const FormSchema = z.object({
   machineId: z.number().min(1, {
     message: "pass any number.",
   }),
-  email: z.string().email({
+  warning: z.string().email({
     message: "Invalid email address.",
   }),
-  password: z.string().min(6, {
+  messageText: z.string().min(6, {
     message: "Password must be at least 6 characters.",
   }),
 });
@@ -34,16 +34,15 @@ export default function MachineReportForm() {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       machineId: 0,
-      email: "",
-      password: "",
+      warning: "",
+      messageText: "",
     },
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
       title: "Form submitted",
-      description:
-        "Your report has been sent successfully.",
+      description: "Your report has been sent successfully.",
     });
     console.log(data);
   }
@@ -69,14 +68,14 @@ export default function MachineReportForm() {
 
         <FormField
           control={form.control}
-          name="email"
+          name="warning"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Error type</FormLabel>
               <FormControl>
                 <Input
-                  type="email"
-                  placeholder="example@email.com"
+                  type="text"
+                  placeholder="Define type of warning/error"
                   {...field}
                 />
               </FormControl>
@@ -87,14 +86,14 @@ export default function MachineReportForm() {
 
         <FormField
           control={form.control}
-          name="password"
+          name="messageText"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Message</FormLabel>
               <FormControl>
                 <Input
-                  type="password"
-                  placeholder="Enter your password"
+                  type="text"
+                  placeholder="Describe the error"
                   {...field}
                 />
               </FormControl>

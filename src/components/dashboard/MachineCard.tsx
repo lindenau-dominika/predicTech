@@ -10,8 +10,9 @@ interface MachineProps {
 export default function MachineCard({ machinesData }: MachineProps) {
   return (
     <>
+      {console.log(machinesData)}
       {machinesData.map((machine) => (
-        <Link to={`/machines/${machine.machineId}`}>
+        <Link to={`/machines/${Number(machine.machine_id)}`}>
           <Card
             className={cn(
               "dark:bg-zinc-900 h-56 border-zinc-400",
@@ -44,7 +45,7 @@ export default function MachineCard({ machinesData }: MachineProps) {
               <div className="grid grid-cols-4 gap-2 ">
                 <MachineButtons
                   state={machine.state}
-                  machineId={machine.machineId}
+                  machineId={machine.machine_id}
                 />
               </div>
             </CardContent>

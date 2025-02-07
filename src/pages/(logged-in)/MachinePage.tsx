@@ -6,34 +6,64 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import ErrorCard from "@/components/machine/ErrorCard";
+import { useEffect } from "react";
+import { getCompanyDetails } from "@/api/company";
+import { useState } from "react";
 
-interface MachineProps {
-  machinesData: Machine[];
-}
+// interface MachineProps {
 
-export default function MachinePage({ machinesData }: MachineProps) {
+//   machinesData: Machine[];
+// }
+
+export default function MachinePage() {
+  const [machine, setMachine] = useState<any>(null); // Stan na przechowywanie danych firmy
+
   const { id } = useParams<{ id: string }>();
+  let line: string;
+  let machineId: string;
 
-  const machine = machinesData.find((m) => m.machineId === Number(id));
+  if (id) {
+    line = id.slice(0, 1);
+    machineId = id.slice(1);
+  }
 
+  useEffect(() => {
+    const fetchMachinesData = async () => {
+      try {
+        const machineData = await getCompanyDetails(0);
+        if (machineData && !machineData.error) {
+          setMachine(machineData.production_lines[line].machines[0]);
+          console.log(machineData.production_lines[line].machines[0]);
+        }
+      } catch (error) {
+        console.error("Error fetching company data:", error);
+      }
+    };
+    fetchMachinesData();
+  }, []);
+
+  // const machine = machinesData.find((m) => m.machine_id === Number(id));
+  console.log(machine);
   if (!machine) {
     return <h1>Maszyna nie znaleziona</h1>;
   }
 
   return (
     <div className="w-full flex flex-col">
-      <h1 className="text-3xl font-medium p-2 px-0">Machine ID: {machine.machineId}</h1>
+      <h1 className="text-3xl font-medium p-2 px-0">Machine ID: {id}</h1>
       <MachineStatsCard />
       <div className="grid grid-cols-5 gap-8 h-[30rem]">
         <div className="col-span-4">
-          <GradientChart data={machine.dataset}/>
+          <GradientChart data={machine.dataset} />
         </div>
         <Card className="col-span-1 h-[30rem]">
           <CardHeader>
             <CardTitle className="items-center grid grid-cols-2 ">
               Recent Raports
-              <Link to="/add-sensor">
-                <Button className="rounded bg-predic dark:bg-predic text-white dark:text-white">Report Machine</Button>
+              <Link to="/report">
+                <Button className="rounded bg-predic dark:bg-predic text-white dark:text-white">
+                  Report Machine
+                </Button>
               </Link>
             </CardTitle>
           </CardHeader>
@@ -51,7 +81,7 @@ export default function MachinePage({ machinesData }: MachineProps) {
                 machineId={7}
                 isWarning={false}
                 message={
-                  "Consumption of machine increased to 80% of its power. "
+                  "some kind of a warning, some kind of a warning, some kind of a warning. "
                 }
               />
               <ErrorCard

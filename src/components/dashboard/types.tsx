@@ -1,5 +1,5 @@
 export interface Machine {
-  machineId: number;
+  machine_id: number;
   name: string;
   state: boolean;
   timeOn: Date;

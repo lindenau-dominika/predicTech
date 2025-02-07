@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,42 +15,74 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Toaster } from "../ui/toaster";
+import { getCompanyDetails } from "@/api/company";
+
+interface CompanyProps {
+  company_id: number;
+}
+
+const company = await getCompanyDetails(0);
+console.log(company.production_lines);
 
 const FormSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Invalid email address.",
-  }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
-  }),
+  line_name: z.string().min(1, { message: "Line name is required." }),
+  machine_name: z
+    .string()
+    .min(2, { message: "Machine name must be at least 2 characters." }),
+  company_id: z
+    .number()
+    .min(0, { message: "Machine ID must be a positive number." }),
+  machine_id: z
+    .number()
+    .min(0, { message: "Machine ID must be a positive number." }),
 });
 
 export default function MachineInputForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: "",
-      email: "",
-      password: "",
+      line_name: "",
+      machine_name: "",
+      company_id: company.company_id,
+      machine_id: 0,
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "Form submitted",
-      description:
-        // <pre className="mt-2 w-[340px] rounded-md bg-zinc-950 p-4 z-50 absolute">
-        //   <code className="text-white">
-        //     {JSON.stringify(data.username, null, 2)}
-        //   </code>
-        // </pre>
-        "Your new connection has been added successfully.",
-    });
-    console.log(data);
+  // Funkcja onSubmit
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    try {
+      // Uzyskaj długość maszyn w danej linii
+      const line = data.line_name;
+      const lineMachines = company.production_lines[line]?.machines || [];
+      const nextMachineId = lineMachines.length;
+      console.log(lineMachines.length);
+
+      // Zaktualizuj machine_id w danych
+      const updatedData = { ...data, machine_id: nextMachineId };
+
+      const response = await fetch("http://localhost:5000/add-machine", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedData),
+      });
+
+      const result = await response.json();
+      if (!response.ok)
+        throw new Error(result.error || "Failed to add machine.");
+
+      toast({
+        title: "Success",
+        description: "Machine has been added successfully!",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong.",
+        variant: "destructive",
+      });
+    }
   }
+
   return (
     <Form {...form}>
       <form
@@ -60,12 +91,12 @@ export default function MachineInputForm() {
       >
         <FormField
           control={form.control}
-          name="username"
+          name="line_name"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Production Line</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Enter line name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -74,40 +105,19 @@ export default function MachineInputForm() {
 
         <FormField
           control={form.control}
-          name="email"
+          name="machine_name"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Machine Name</FormLabel>
               <FormControl>
-                <Input
-                  type="email"
-                  placeholder="example@email.com"
-                  {...field}
-                />
+                <Input placeholder="Enter machine name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Enter your password"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Add Machine</Button>
       </form>
       <Toaster />
     </Form>
