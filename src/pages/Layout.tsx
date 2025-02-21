@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "@/components/Navbar";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/AppSidebar";
-import { CustomTrigger } from "@/components/ui/CustomTrigger";
+import Navbar from "@/lib/components/Navbar";
+import { SidebarProvider } from "@/lib/components/ui/sidebar";
+import { AppSidebar } from "@/lib/components/AppSidebar";
+import { CustomTrigger } from "@/lib/components/ui/CustomTrigger";
 
 export default function Layout() {
   return (

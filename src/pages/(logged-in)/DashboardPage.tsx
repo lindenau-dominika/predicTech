@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import AddMachineCard from "@/components/dashboard/AddMachineCard";
-import MachineCard from "@/components/dashboard/MachineCard";
-import StatsCard from "@/components/dashboard/StatsCard";
-import { getCompanyDetails } from "@/api/company";
-import type { Machine } from "@/components/dashboard/types";
+import AddMachineCard from "@/lib/components/dashboard/AddMachineCard";
+import MachineCard from "@/lib/components/dashboard/MachineCard";
+import StatsCard from "@/lib/components/dashboard/StatsCard";
+import { getCompanyDetails } from "@/lib/api/company";
+import type { Machine } from "@/lib/components/dashboard/types";
 
 export default function Dashboard() {
   const [selectedLine, setSelectedLine] = useState<"1" | "2" | "3">("1");

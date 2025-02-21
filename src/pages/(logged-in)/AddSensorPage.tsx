@@ -1,5 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import MachineInputForm from "@/components/add_sensor/MachineInputForm";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/lib/components/ui/card";
+import MachineInputForm from "@/lib/components/add_sensor/MachineInputForm";
 
 export default function AddSensorPage() {
   return (

@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/lib/components/ui/card";
 import { Link } from "react-router-dom";
 
 export default function AddMachineCard() {

@@ -1,4 +1,4 @@
-import { useSidebar } from "@/components/ui/sidebar";
+import { useSidebar } from "@/lib/components/ui/sidebar";
 import { MessageCircleWarning } from "lucide-react";
 
 export function CustomTrigger() {

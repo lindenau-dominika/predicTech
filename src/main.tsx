@@ -9,7 +9,10 @@ import Layout from "./pages/Layout";
 import AddSensorPage from "./pages/(logged-in)/AddSensorPage";
 import MachinePage from "./pages/(logged-in)/MachinePage";
 import AddReportPage from "./pages/(logged-in)/AddReportPage";
-import { Machine } from "./components/dashboard/types";
+import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/login/LoginPage";
+import RegisterPage from "./pages/register/RegisterPage";
+// import { Machine } from "./components/dashboard/types";
 
 // const company = await getCompanyDetails(23);
 // console.log(company.production_lines);
@@ -98,7 +101,6 @@ import { Machine } from "./components/dashboard/types";
 //     },
 //   ],
 // });
-let machines: Machine[] = [];
 
 // interface LineProps {
 //   machines: Machine[];
@@ -113,14 +115,21 @@ let machines: Machine[] = [];
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <LandingPage />,
+
     errorElement: <NotFound />,
+  },
+  { path: "/login", element: <LoginPage /> },
+  { path: "/register", element: <RegisterPage /> },
+  {
+    path: "/app",
+    element: <Layout />,
     children: [
-      { path: "/", element: <Dashboard /> },
-      { path: "/add-sensor", element: <AddSensorPage /> },
-      { path: "/report", element: <AddReportPage /> },
+      { path: "/app", element: <Dashboard /> },
+      { path: "/app/add-sensor", element: <AddSensorPage /> },
+      { path: "/app/report", element: <AddReportPage /> },
       {
-        path: "/machines/:id",
+        path: "/app/machines/:id",
         element: <MachinePage />,
       },
     ],

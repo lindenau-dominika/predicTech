@@ -1,6 +1,11 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import MachineInputForm from "@/components/add_sensor/MachineInputForm";
-import MachineReportForm from "@/components/report/MachineReportForm";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/lib/components/ui/card";
+// import MachineInputForm from "@/components/add_sensor/MachineInputForm";
+import MachineReportForm from "@/lib/components/report/MachineReportForm";
 
 export default function AddReportPage() {
   return (

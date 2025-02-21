@@ -1,13 +1,17 @@
-import type { Machine } from "@/components/dashboard/types";
 import { Link, useParams } from "react-router-dom";
-import GradientChart from "@/components/machine/GradientChart";
-import MachineStatsCard from "@/components/machine/MachineStatsCard";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import GradientChart from "@/lib/components/machine/GradientChart";
+import MachineStatsCard from "@/lib/components/machine/MachineStatsCard";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/lib/components/ui/card";
+import { Button } from "@/lib/components/ui/button";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import ErrorCard from "@/components/machine/ErrorCard";
+import ErrorCard from "@/lib/components/machine/ErrorCard";
 import { useEffect } from "react";
-import { getCompanyDetails } from "@/api/company";
+import { getCompanyDetails } from "@/lib/api/company";
 import { useState } from "react";
 
 // interface MachineProps {

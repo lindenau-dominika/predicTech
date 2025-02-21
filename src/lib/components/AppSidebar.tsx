@@ -7,7 +7,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "@/lib/components/ui/sidebar";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 const items = [

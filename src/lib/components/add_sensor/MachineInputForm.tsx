@@ -3,8 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { toast } from "@/hooks/use-toast";
-import { Button } from "@/components/ui/button";
+import { toast } from "@/lib/hooks/use-toast";
+import { Button } from "@/lib/components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,10 +12,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/lib/components/ui/form";
+import { Input } from "@/lib/components/ui/input";
 import { Toaster } from "../ui/toaster";
-import { getCompanyDetails } from "@/api/company";
+import { getCompanyDetails } from "@/lib/api/company";
 
 interface CompanyProps {
   company_id: number;
