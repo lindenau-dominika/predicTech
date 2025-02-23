@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
-import AddMachineCard from "@/lib/components/dashboard/AddMachineCard";
-import MachineCard from "@/lib/components/dashboard/MachineCard";
-import StatsCard from "@/lib/components/dashboard/StatsCard";
+import AddMachineCard from "@/lib/components/machineList/AddMachineCard";
+import MachineCard from "@/lib/components/machineList/MachineCard";
+import StatsCard from "@/lib/components/machineList/StatsCard";
 import { getCompanyDetails } from "@/lib/api/company";
-import type { Machine } from "@/lib/components/dashboard/types";
+import type { Machine } from "@/lib/components/machineList/types";
 
-export default function Dashboard() {
+export default function MachineListPage() {
   const [selectedLine, setSelectedLine] = useState<"1" | "2" | "3">("1");
   const [machines, setMachines] = useState<Machine[]>([]); // Stan na przechowywanie maszyn
   const [company, setCompany] = useState<any>(null); // Stan na przechowywanie danych firmy
 
-  // Funkcja do obsługi zmiany wybranej linii produkcyjnej
   const handleLineChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const line = event.target.value as "1" | "2" | "3";
     setSelectedLine(line);

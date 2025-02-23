@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import LandingCard from "@/lib/components/landing_page/LandingCard";
+import LandingCard from "@/lib/components/landingPage/LandingCard";
 import TrialPhoto from "../lib/assets/img1.png";
 import TrialPhoto1 from "../lib/assets/img2.png";
-import LandingNavbar from "@/lib/components/landing_page/LandingNavbar";
-import InfoCard from "@/lib/components/landing_page/InfoCard";
+import LandingNavbar from "@/lib/components/landingPage/LandingNavbar";
+import InfoCard from "@/lib/components/landingPage/InfoCard";
 
 interface CardInfo {
   title: string;

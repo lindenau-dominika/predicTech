@@ -1,33 +1,17 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/lib/components/ui/card";
-import { Zap } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import type { StatsCardProps } from "@/pages/(logged-in)/Dashboard";
 
-export default function StatsCard() {
-  const stats = [
-    { title: "Energy", value: "xxxxx" },
-    { title: "Energy", value: "xxxxx" },
-    { title: "Energy", value: "xxxxx" },
-    { title: "Energy", value: "xxxxx" },
-  ];
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 my-4">
-      {stats.map((stat, index) => (
-        <Card
-          key={index}
-          className="dark:bg-zinc-900 light:bg-zinc-300 border-zinc-400 h-40"
-        >
-          <CardHeader className="flex flex-row justify-between">
-            <CardTitle className="text-xl">{stat.title}</CardTitle>
-            <Zap className="size-6 stroke-predic" />
-          </CardHeader>
-          <CardContent className="text-2xl font-bold">{stat.value}</CardContent>
+export default function StatsCard({ title, description, value} : StatsCardProps) {
+    return (
+        <Card className="w-80">
+            <CardHeader>
+                <CardTitle>{title}
+                </CardTitle>
+                <CardDescription>{description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+                {value}
+            </CardContent>
         </Card>
-      ))}
-    </div>
-  );
+    )
 }

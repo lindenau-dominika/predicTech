@@ -20,6 +20,13 @@ export default function Navbar() {
               Dashboard
             </Link>
             <Link
+              to="/app/machine-list"
+              className="font-medium flex items-center text-sm transition-colors hover:underline"
+              //   prefetch={false}
+            >
+              Machines
+            </Link>
+            <Link
               to="/app/add-sensor"
               className="font-medium flex items-center text-sm transition-colors hover:underline"
               //   prefetch={false}
