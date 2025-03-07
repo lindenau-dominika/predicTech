@@ -7,39 +7,44 @@ import MachineListElement from "@/lib/components/machineList/MachineListElement"
 // import type { Machine } from "@/lib/components/machineList/types";
 
 type Machine = {
-  id: string;
+  name: string;
+  _id: string;
 };
 export default function MachineListPage() {
-  const [selectedLine, setSelectedLine] = useState<"1" | "2" | "3">("1");
   const [machines, setMachines] = useState<Machine[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const handleLineChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const line = event.target.value as "1" | "2" | "3";
-    setSelectedLine(line);
+  useEffect(() => {
+    const fetchMachines = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch(
+          "https://backend-production-1467.up.railway.app/api/machines",
+          { credentials: "include" }
+        );
+
+        const data = await response.json();
+        setMachines(data.machines);
+      } catch (error) {
+        console.log("lol nie działa");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchMachines();
+  }, []);
+
+  const handleDeleteMachine = (id: string) => {
+    setMachines((prevMachines) =>
+      prevMachines ? prevMachines.filter((machine) => machine._id !== id) : null
+    );
   };
 
-  // useEffect(() => {
-  //   fetch("https://backend-production-1467.up.railway.app/api/lines")
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error(`HTTP error! Status: ${response.status}`);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       setMachines(data);
-  //       setLoading(false);
-  //     })
-  //     .catch((err) => {
-  //       setError(err.message);
-  //       setLoading(false);
-  //     });
-  // }, []);
-
-  // if (loading) return <p>Ładowanie...</p>;
-  // if (error) return <p>Błąd: {error}</p>;
+  console.log(machines);
+  if (loading) return <p>Ładowanie...</p>;
+  if (error) return <p>Błąd: {error}</p>;
 
   return (
     <div className="gap-8 flex flex-col">
@@ -59,14 +64,13 @@ export default function MachineListPage() {
             <span className="w-full text-end">Action</span>
           </div>
         </div>
-        <MachineListElement />
-        <MachineListElement />
-        <MachineListElement />
-        <MachineListElement />
-        <MachineListElement />
-        <MachineListElement />
-        <MachineListElement />
-        <MachineListElement />
+        {machines?.map((machine) => (
+          <MachineListElement
+            name={machine.name}
+            _id={machine._id}
+            onDelete={handleDeleteMachine}
+          />
+        ))}
       </div>
     </div>
   );

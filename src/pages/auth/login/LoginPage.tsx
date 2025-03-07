@@ -28,6 +28,7 @@ export default function LoginPage() {
         "https://backend-production-1467.up.railway.app/api/auth/login",
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         }
@@ -36,6 +37,7 @@ export default function LoginPage() {
       if (response.ok) {
         const userData = await response.json();
         login(userData);
+        console.log("Otrzymana odpowiedź:", userData);
 
         toast({
           title: "Logged in successfully",
