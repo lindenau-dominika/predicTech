@@ -1,7 +1,8 @@
-export interface Machine {
-  machine_id: number;
+export type Machine = {
   name: string;
-  state: boolean;
-  timeOn: Date;
-  dataset: number[];
-}
+  _id: string;
+  liveKw: number;
+  maxPowerConsumption?: number;
+  currentState: "alarm" | "normal" | "unplanned downtime" | "planned downtime";
+  status: "on" | "off" | "idle";
+};

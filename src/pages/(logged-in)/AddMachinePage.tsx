@@ -4,9 +4,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/lib/components/ui/card";
-import MachineInputForm from "@/lib/components/add_sensor/MachineInputForm";
+import MachineInputForm from "@/lib/components/forms/MachineInputForm";
 
-export default function AddSensorPage() {
+export default function AddMachinePage() {
   return (
     <div className="flex w-full max-h-screen h-full items-center justify-center border">
       <Card className=" h-[38rem] w-full p-2 flex flex-col items-end">
