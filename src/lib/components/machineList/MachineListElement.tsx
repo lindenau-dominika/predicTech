@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Machine } from "./types";
 import { getMachineUtilization } from "@/lib/utils/machineSimulation";
+import { useNotifications } from "@/context/NotificationContext";
 
 type Props = Machine & { sensorValue?: number; sensorThreshold?: number; sensorLabel?: string };
 
@@ -119,6 +120,8 @@ export default function MachineListElement({
   const util = getMachineUtilization(_id);
   const colors = STATE_COLORS[currentState] ?? STATE_COLORS["planned downtime"];
   const breach = sensorValue !== undefined && sensorThreshold !== undefined && sensorValue < sensorThreshold;
+  const { reports } = useNotifications();
+  const openTickets = reports.filter((r) => r.machineId === _id && r.status !== "fixed");
 
   return (
     <Link to={`/app/machine?machineId=${_id}`} className="block group">
@@ -128,14 +131,21 @@ export default function MachineListElement({
         <div className={`h-[3px] w-full ${colors.stripClass}`} />
 
         {/* header */}
-        <div className="flex items-center justify-between px-5 pt-4 pb-1 gap-3">
+        <div className="flex items-center justify-between px-5 pt-4 pb-1 gap-2">
           <span className="font-bold text-base text-gray-900 dark:text-zinc-50 truncate leading-snug">
             {name}
           </span>
-          <span className={`shrink-0 flex items-center gap-1.5 text-[10px] font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${colors.badge}`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${colors.dot}`} />
-            {STATE_LABEL[currentState]}
-          </span>
+          <div className="flex items-center gap-1.5 shrink-0">
+            {openTickets.length > 0 && (
+              <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800">
+                🎫 {openTickets.length}
+              </span>
+            )}
+            <span className={`flex items-center gap-1.5 text-[10px] font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${colors.badge}`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${colors.dot}`} />
+              {STATE_LABEL[currentState]}
+            </span>
+          </div>
         </div>
 
         {/* donut + stats row */}
